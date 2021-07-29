@@ -6,10 +6,10 @@ public interface IAddressBookService {
 
 	public static List<AddressBook> add(List<AddressBook> addressBook) {
 
-		addressBook.add(new AddressBook(1, "Venkat", "Reddy", "venkat@gmail.com", "H.no:- 3-64", "Hyderabad",
+		addressBook.add(new AddressBook(1, "venkat", "Reddy", "venkat@gmail.com", "H.no:- 3-64", "Hyderabad",
 				"Telangana", "9876543210"));
 
-		addressBook.add(new AddressBook(2, "Aniket", "Chile", "aniket@gmail.com", "H.no:- 5-23", "Pune", "Maharastra",
+		addressBook.add(new AddressBook(1, "aniket", "Chile", "aniket@gmail.com", "H.no:- 5-23", "Pune", "Maharastra",
 				"9876543211"));
 
 		addressBook.add(new AddressBook(3, "sunil", "patil", "sunil@gmail.com", "H.no:- 4-47", "mumbai", "Maharastra",
@@ -22,7 +22,15 @@ public interface IAddressBookService {
 	
 	public void showAddressBook();
 	
+	public void showAddressBookView(List<AddressBookView> addressView);
+	
 	public AddressBook getAddressByEmail(String emailId);
 	
 	public void removeAddress(String emailId);
+	
+	public List<AddressBookView> trasformAddressBook();
+	
+	public List<AddressBookView> sortOnFirstName(List<AddressBookView> addressBookView);
+	
+	public List<AddressBookView> customSort(List<AddressBookView> addressBookView);
 }

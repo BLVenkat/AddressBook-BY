@@ -1,7 +1,9 @@
 package com.bridgelabz.addressbook;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class AddressBookImp implements IAddressBookService {
 
@@ -43,7 +45,51 @@ public class AddressBookImp implements IAddressBookService {
 			this.addressBook.remove(addressBook);
 		}	
 	}
-	
+
+	@Override
+	public List<AddressBookView> trasformAddressBook() {
+		return addressBook.stream().map(address -> new AddressBookView(address.getId(), 
+				                                                       address.getFirstName(),
+				                                                       address.getEmail(),
+				                                                       address.getAddress()))
+		                           .collect(Collectors.toList());
+						
+//		return addressBook.stream().map(address -> {
+//			AddressBookView addressView = new AddressBookView();
+//			addressView.setId(address.getId());
+//			addressView.setFirstName(address.getFirstName());
+//			addressView.setEmail(address.getEmail());
+//			addressView.setAddress(address.getAddress());
+//			return addressView;
+//		}).collect(Collectors.toList());
+	}
+
+	@Override
+	public List<AddressBookView> sortOnFirstName(List<AddressBookView> addressBookView) {
+		return addressBookView.stream().sorted(Comparator.comparing(AddressBookView::getFirstName)) 
+		                        .collect(Collectors.toList());
+	}
+
+	@Override
+	public void showAddressBookView(List<AddressBookView> addressView) {
+		addressView.forEach(address ->{
+			System.out.println(address);
+		});
+	}
+
+	@Override
+	public List<AddressBookView> customSort(List<AddressBookView> addressBookView) {
+		return addressBookView.stream().sorted((a,b) ->{
+			if(a.getId() == b.getId()) 
+				return a.getFirstName().compareTo(b.getFirstName());
+			
+			else if(a.getId()>b.getId())
+					return 1;
+			
+			return -1;
+			
+		}).collect(Collectors.toList());
+	}
 	
 
 }
